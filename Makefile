@@ -1,8 +1,8 @@
 NAME        = hotrace
 CC          = cc
 CFLAGS      = -Wall -Wextra -Werror -O3 -Ofast -march=native -funroll-loops
-SRCS        = hash_methods.c hotrace.c hr_tools.c main.c init.c
-OBJS        = build/hash_methods.o build/hotrace.o build/hr_tools.o build/main.o build/init.o
+SRCS        = hash_methods.c hotrace.c hr_tools.c main.c init.c hr_utils.c
+OBJS        = build/hash_methods.o build/hotrace.o build/hr_tools.o build/main.o build/init.o build/hr_utils.o
 HEADER      = hotrace.h
 RM          = rm -rf
 PYTHON      = python3

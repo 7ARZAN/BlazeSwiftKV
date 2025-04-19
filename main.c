@@ -1,18 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/19 21:43:51 by mhayyoun          #+#    #+#             */
+/*   Updated: 2025/04/19 21:43:52 by mhayyoun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "hotrace.h"
 
-// Process input key-value pairs
+static inline void	write_str(const char *str)
+{
+	write(1, str, ft_strlen(str));
+}
+
 static int	handle_pair(t_hotrace *hr, char *line)
 {
 	char	*key;
 	char	*value;
 
-	key = ft_strdup_arena(hr, line, __builtin_strlen(line));
+	key = ft_strdup_arena(hr, line, ft_strlen(line));
 	if (!key)
 		return (write_str("Arena Allocation failed for key\n"), 0);
 	line = read_line(hr);
 	if (!line)
 		return (0);
-	value = ft_strdup_arena(hr, line, __builtin_strlen(line));
+	value = ft_strdup_arena(hr, line, ft_strlen(line));
 	if (!value)
 		return (write_str("Arena Allocation failed for value\n"), 0);
 	if (!insert(hr, key, value))
@@ -44,7 +60,7 @@ static void	process_queries(t_hotrace *hr)
 	char	*line;
 	char	*value;
 
-	while (1) 
+	while (1)
 	{
 		line = read_line(hr);
 		if (!line)
