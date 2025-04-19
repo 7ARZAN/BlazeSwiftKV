@@ -1,6 +1,6 @@
 #include "hotrace.h"
 
-static t_hotrace *allocate_hotrace(void)
+static t_hotrace	*allocate_hotrace(void)
 {
     t_hotrace *hr;
 
@@ -36,7 +36,7 @@ static t_hotrace *allocate_hotrace(void)
     return hr;
 }
 
-t_hotrace *init_hotrace(void)
+t_hotrace	*init_hotrace(void)
 {
     t_hotrace	*hr;
     size_t	index;
@@ -46,9 +46,11 @@ t_hotrace *init_hotrace(void)
     index = 0;
     if (!hr)
         return NULL;
-    while (index < TABLE_SIZE){
+    while (index < TABLE_SIZE)
+    {
 	j = 0;
-	while (j < BUCKET_SIZE){
+	while (j < BUCKET_SIZE)
+	{
 	    hr->buckets[index].metadata[j] = EMPTY;
 	    j++;
 	}
