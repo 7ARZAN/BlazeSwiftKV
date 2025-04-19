@@ -3,28 +3,26 @@
 // Process input key-value pairs
 static int	handle_pair(t_hotrace *hr, char *line)
 {
-    char *key;
-    char *value;
+    char	*key;
+    char	*value;
 
     key = ft_strdup_arena(hr, line, __builtin_strlen(line));
-    if (!key){
-        // write_str("Arena allocation failed for key\n");
-        return 0;
-    }
+    if (!key)
+        return (write_str("Arena Allocation failed for key\n"), 0);
     line = read_line(hr);
-    if (!line) return 0;
+    if (!line)
+	return (0);
     value = ft_strdup_arena(hr, line, __builtin_strlen(line));
-    if (!value){
-        // write_str("Arena allocation failed for value\n");
-        return 0;
+    if (!value)
+        return (write_str("Arena Allocation failed for value\n"), 0);
+    if (!insert(hr, key, value))
+    {
+        write_str("Insertion failed for key: ");
+        write_str(key);
+        write_str("\n");
+        return (0);
     }
-    if (!insert(hr, key, value)) {
-        // write_str("Insertion failed for key: ");
-        // write_str(key);
-        // write_str("\n");
-        return 0;
-    }
-    return 1;
+    return (1);
 }
 
 static void	process_input(t_hotrace *hr){
@@ -55,7 +53,8 @@ static void	process_queries(t_hotrace *hr)
         value = search(hr, line);
         if (value)
 	    write_str(value);
-        else {
+        else
+	{
             write_str(line);
             write_str(": Not found.");
         }
@@ -73,5 +72,6 @@ int main(void)
     process_input(hr);
     process_queries(hr);
     free_hotrace(hr);
-    return 0;
+    while(1) pause();
+    return (0);
 }

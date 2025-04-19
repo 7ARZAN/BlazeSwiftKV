@@ -11,7 +11,7 @@
 #define BUCKET_SIZE 8        // Slots per bucket
 #define LOAD_FACTOR 0.75     // Load factor for resizing
 #define BUFFER_SIZE 65536 // 64KB input buffer
-#define MAX_LINE 1024        // Max line length
+#define MAX_LINE 10240        // Max line length
 #define INITIAL_ARENA_SIZE 1073741824
 
 // Metadata byte: 7 bits for H2, 1 bit for empty/occupied
@@ -40,10 +40,10 @@ typedef struct	s_arena_chunk
 
 typedef struct s_hotrace
 {
+    t_arena_chunk	*arena;     		// Linked list of arena chunks
     t_bucket		*buckets;        	// Array of buckets
     char		*buffer;             	// Input buffer
     char		*line;             	// Current line
-    t_arena_chunk	*arena;     		// Linked list of arena chunks
     size_t		buf_pos;           	// Buffer position
     size_t		buf_len;           	// Buffer length
     size_t		count;             	// Number of entries

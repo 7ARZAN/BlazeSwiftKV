@@ -1,12 +1,14 @@
 #include "hotrace.h"
 
 // Arena-based string duplication with chunk-based allocation
-char *ft_strdup_arena(t_hotrace *hr, const char *s, size_t len)
+char	*ft_strdup_arena(t_hotrace *hr, const char *s, size_t len)
 {
-    t_arena_chunk *chunk = hr->arena;
-    t_arena_chunk *prev = NULL;
-    char *dst;
+    t_arena_chunk	*chunk;
+    t_arena_chunk	*prev;
+    char	*dst;
 
+    chunk = hr->arena;
+    prev = NULL;
     while (chunk && chunk->pos + len + 1 > chunk->size)
     {
         prev = chunk;
@@ -16,12 +18,12 @@ char *ft_strdup_arena(t_hotrace *hr, const char *s, size_t len)
     {
         chunk = malloc(sizeof(t_arena_chunk));
         if (!chunk)
-            return NULL;
+            return (NULL);
         chunk->data = malloc(INITIAL_ARENA_SIZE);
         if (!chunk->data)
         {
             free(chunk);
-            return NULL;
+            return (NULL);
         }
         chunk->pos = 0;
         chunk->size = INITIAL_ARENA_SIZE;
@@ -35,15 +37,15 @@ char *ft_strdup_arena(t_hotrace *hr, const char *s, size_t len)
     __builtin_memcpy(dst, s, len);
     dst[len] = '\0';
     chunk->pos += len + 1;
-    return dst;
+    return (dst);
 }
 
-void write_str(const char *str)
+void	write_str(const char *str)
 {
     write(1, str, __builtin_strlen(str));
 }
 
-static char *process_buffer(t_hotrace *hr, size_t *line_pos)
+static char	*process_buffer(t_hotrace *hr, size_t *line_pos)
 {
     if (hr->buf_pos >= hr->buf_len)
     {
@@ -60,9 +62,9 @@ static char *process_buffer(t_hotrace *hr, size_t *line_pos)
     return ("");
 }
 
-char *read_line(t_hotrace *hr)
+char	*read_line(t_hotrace *hr)
 {
-    size_t line_pos;
+    size_t	line_pos;
 
     line_pos = 0;
     while (1)
@@ -75,7 +77,7 @@ char *read_line(t_hotrace *hr)
             if (hr->line[line_pos] == '\n')
             {
                 hr->line[line_pos] = '\0';
-                return hr->line;
+                return (hr->line);
             }
             if (line_pos < MAX_LINE - 1)
                 line_pos++;
@@ -83,10 +85,10 @@ char *read_line(t_hotrace *hr)
     }
 }
 
-void free_hotrace(t_hotrace *hr)
+void	free_hotrace(t_hotrace *hr)
 {
-    t_arena_chunk *chunk;
-    t_arena_chunk *next;
+    t_arena_chunk	*chunk;
+    t_arena_chunk	*next;
 
     if (!hr)
         return;
