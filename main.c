@@ -53,23 +53,23 @@ static void	process_queries(t_hotrace *hr)
         if (!line[0])
 	    continue;
         value = search(hr, line);
-     //    if (value)
-	    // write_str(value);
-     //    else {
-     //        write_str(line);
-     //        write_str(": Not found.");
-     //    }
-     //    write_str("\n");
+        if (value)
+	    write_str(value);
+        else {
+            write_str(line);
+            write_str(": Not found.");
+        }
+        write_str("\n");
     }
 }
 
 int main(void)
 {
-    t_hotrace *hr;
+    t_hotrace	*hr;
 
     hr = init_hotrace();
     if (!hr)
-	return 1;
+	return (1);
     process_input(hr);
     process_queries(hr);
     free_hotrace(hr);

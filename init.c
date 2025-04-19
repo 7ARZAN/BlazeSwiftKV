@@ -6,11 +6,11 @@ static t_hotrace *allocate_hotrace(void)
 
     hr = malloc(sizeof(t_hotrace));
     if (!hr)
-	return NULL;
+        return NULL;
     hr->buckets = malloc(TABLE_SIZE * sizeof(t_bucket));
     hr->buffer = malloc(BUFFER_SIZE);
     hr->line = malloc(MAX_LINE);
-    hr->arena = malloc(INITIAL_ARENA_SIZE);
+    hr->arena = malloc(sizeof(t_arena_chunk));
     if (!hr->buckets || !hr->buffer || !hr->line || !hr->arena)
     {
         free(hr->buckets);
@@ -20,25 +20,44 @@ static t_hotrace *allocate_hotrace(void)
         free(hr);
         return NULL;
     }
+    hr->arena->data = malloc(INITIAL_ARENA_SIZE);
+    if (!hr->arena->data)
+    {
+        free(hr->buckets);
+        free(hr->buffer);
+        free(hr->line);
+        free(hr->arena);
+        free(hr);
+        return NULL;
+    }
+    hr->arena->pos = 0;
+    hr->arena->size = INITIAL_ARENA_SIZE;
+    hr->arena->next = NULL;
     return hr;
 }
 
-t_hotrace	*init_hotrace(void)
+t_hotrace *init_hotrace(void)
 {
-    t_hotrace *hr;
+    t_hotrace	*hr;
+    size_t	index;
+    size_t	j;
 
     hr = allocate_hotrace();
-    if (!hr) return
-	NULL;
-    for (size_t i = 0; i < TABLE_SIZE; i++)
-        for (size_t j = 0; j < BUCKET_SIZE; j++)
-            hr->buckets[i].metadata[j] = EMPTY;
+    index = 0;
+    if (!hr)
+        return NULL;
+    while (index < TABLE_SIZE){
+	j = 0;
+	while (j < BUCKET_SIZE){
+	    hr->buckets[index].metadata[j] = EMPTY;
+	    j++;
+	}
+	index++;
+    }
     hr->buf_pos = 0;
     hr->buf_len = 0;
     hr->count = 0;
     hr->capacity = TABLE_SIZE;
     hr->fd = 0;
-    hr->arena_pos = 0;
-    hr->arena_size = INITIAL_ARENA_SIZE;
     return hr;
 }
