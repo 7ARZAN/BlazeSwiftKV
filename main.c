@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 21:43:51 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/04/19 21:43:52 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/04/20 10:40:43 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ static void	process_queries(t_hotrace *hr)
 		else
 		{
 			write_str(line);
-			write_str(": Not found.");
+			write(1, ": Not found.", 12);
 		}
-		write_str("\n");
+		write(1, "\n", 1);
 	}
 }
 

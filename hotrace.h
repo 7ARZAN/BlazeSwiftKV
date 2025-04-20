@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 21:44:09 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/04/19 21:56:45 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/04/20 10:17:42 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char						*ft_strdup_arena(t_hotrace *hr, const char *s,
 								size_t len);
 char						*read_line(t_hotrace *hr);
 void						free_hotrace(t_hotrace *hr);
-uint64_t					wyhash(const char *str);
+uint64_t					djb2(const char *str);
 uint8_t						h2(uint64_t hash);
 int							insert(t_hotrace *hr, const char *key,
 								const char *value);

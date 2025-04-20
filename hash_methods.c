@@ -12,19 +12,19 @@
 
 #include "hotrace.h"
 
-uint64_t	wyhash(const char *str)
+uint64_t	djb2(const char *str)
 {
-	uint64_t		seed;
-	const uint8_t	*p;
+	uint64_t	h;
+	int			c;
 
-	seed = 0xa0761d6478bd642fULL;
-	p = (const uint8_t *)str;
-	while (*p)
+	h = 5381;
+	while (*str)
 	{
-		seed ^= (uint64_t) * p++;
-		seed *= 0x9e3779b97f4a7c15ULL;
+		c = *str;
+		h = ((h << 5) + h) + c;
+		str++;
 	}
-	return (seed ^ (seed >> 32));
+	return (h);
 }
 
 uint8_t	h2(uint64_t hash)

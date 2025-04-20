@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 21:48:05 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/04/19 21:57:36 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/04/20 10:17:53 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	insert(t_hotrace *hr, const char *key, const char *value)
 	size_t		bucket_idx;
 	t_store		store;
 
-	hash = wyhash(key);
+	hash = djb2(key);
 	bucket_idx = get_bucket_index(hash, hr->capacity);
 	store = (t_store){.hr = hr, .key = key, .value = value};
 	store.bucket_idx = get_bucket_index(hash, hr->capacity);
@@ -120,7 +120,7 @@ char	*search(t_hotrace *hr, const char *key)
 	uint64_t	hash;
 	size_t		bucket_idx;
 
-	hash = wyhash(key);
+	hash = djb2(key);
 	bucket_idx = get_bucket_index(hash, hr->capacity);
 	return (search_recursive(hr, key, hash, bucket_idx));
 }
