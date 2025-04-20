@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 21:44:09 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/04/20 10:17:42 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/04/20 16:45:03 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ typedef struct s_store
 	t_hotrace				*hr;
 	const char				*key;
 	const char				*value;
+	size_t					v_len;
+	size_t					k_len;
 	size_t					bucket_idx;
 }							t_store;
 
@@ -71,12 +73,11 @@ t_hotrace					*init_hotrace(void);
 char						*search(t_hotrace *hr, const char *key);
 char						*ft_strdup_arena(t_hotrace *hr, const char *s,
 								size_t len);
-char						*read_line(t_hotrace *hr);
+char						*read_line(t_hotrace *hr, size_t *len);
 void						free_hotrace(t_hotrace *hr);
 uint64_t					djb2(const char *str);
 uint8_t						h2(uint64_t hash);
-int							insert(t_hotrace *hr, const char *key,
-								const char *value);
+int							insert(t_hotrace *hr, t_store *st);
 int							resize_table(t_hotrace *hr);
 size_t						ft_strlen(const char *s);
 void						*ft_memcpy(void *dst, const void *src, size_t n);

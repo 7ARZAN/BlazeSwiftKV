@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 21:44:01 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/04/19 21:44:01 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/04/20 16:21:31 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,25 +75,23 @@ static char	*process_buffer(t_hotrace *hr, size_t *line_pos)
 	return ("");
 }
 
-char	*read_line(t_hotrace *hr)
+char	*read_line(t_hotrace *hr, size_t *len)
 {
-	size_t	line_pos;
-
-	line_pos = 0;
+	(*len) = 0;
 	while (1)
 	{
-		if (!process_buffer(hr, &line_pos))
+		if (!process_buffer(hr, &(*len)))
 			return (NULL);
 		if (hr->buf_pos < hr->buf_len)
 		{
-			hr->line[line_pos] = hr->buffer[hr->buf_pos++];
-			if (hr->line[line_pos] == '\n')
+			hr->line[(*len)] = hr->buffer[hr->buf_pos++];
+			if (hr->line[(*len)] == '\n')
 			{
-				hr->line[line_pos] = '\0';
+				hr->line[(*len)] = '\0';
 				return (hr->line);
 			}
-			if (line_pos < MAX_LINE - 1)
-				line_pos++;
+			if ((*len) < MAX_LINE - 1)
+				(*len)++;
 		}
 	}
 }
