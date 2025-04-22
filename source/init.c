@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hotrace.h"
+#include "../include/hotrace.h"
 
 static void	free_hr_content(t_hotrace *hr)
 {

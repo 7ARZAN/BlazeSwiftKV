@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hotrace.h"
-
-// Arena-based string duplication with chunk-based allocation
+#include "../include/hotrace.h"
 
 static inline int	extend_arena(t_hotrace *hr, t_arena_chunk **chunk,
 		t_arena_chunk *prev)

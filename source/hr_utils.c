@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hotrace.h"
+#include "../include/hotrace.h"
 
 size_t	ft_strlen(const char *s)
 {

@@ -1,9 +1,11 @@
 NAME        = hotrace
 CC          = cc
 CFLAGS      = -Wall -Wextra -Werror -O3 -Ofast -fomit-frame-pointer -march=native -funroll-loops
-SRCS        = hash_methods.c hotrace.c hr_tools.c main.c init.c hr_utils.c hr_resize.c hr_search.c
-OBJS        = build/hash_methods.o build/hotrace.o build/hr_tools.o build/main.o build/init.o build/hr_utils.o build/hr_resize.o build/hr_search.o
-HEADER      = hotrace.h
+SRCS        = source/hash_methods.c source/hotrace.c source/hr_tools.c main.c \
+	      source/init.c source/hr_utils.c source/hr_resize.c source/hr_search.c
+OBJS        = build/source/hash_methods.o build/source/hotrace.o build/source/hr_tools.o build/main.o \
+	      build/source/init.o build/source/hr_utils.o build/source/hr_resize.o build/source/hr_search.o
+HEADER      = include/hotrace.h
 RM          = rm -rf
 PYTHON      = python3
 GENERATOR   = input_creator.py 
@@ -31,6 +33,7 @@ build/%.o: %.c $(HEADER)
 build:
 	@echo -e "\r$(C_CYAN)[+] Done: build/ directory created$(C_RESET)"
 	@if [ ! -d "build/" ]; then mkdir build; fi
+	@if [ ! -d "build/source" ]; then mkdir build/source; fi
 
 input: $(TEXT_FILE)
 	@echo -e "$(C_GREEN)[+] Done: Input generation complete$(C_RESET)"

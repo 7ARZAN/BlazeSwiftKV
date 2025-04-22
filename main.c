@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hotrace.h"
+#include "include/hotrace.h"
 
 static inline void	write_str(const char *str)
 {

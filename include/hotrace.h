@@ -17,7 +17,7 @@
 # include <unistd.h>
 
 # define TABLE_SIZE 1048576
-# define BUCKET_SIZE 8
+# define BUCKET_SIZE 32
 # define LOAD_FACTOR 0.75
 # define BUFFER_SIZE 65536
 # define MAX_LINE 10240

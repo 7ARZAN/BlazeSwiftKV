@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hotrace.h"
+#include "../include/hotrace.h"
 
 static inline void	resize_helper_(t_hotrace *hr, t_bucket *old_buckets,
 		size_t old_capacity)

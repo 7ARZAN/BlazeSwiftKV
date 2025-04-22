@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hotrace.h"
+#include "../include/hotrace.h"
 
 uint64_t	djb2(const char *str)
 {

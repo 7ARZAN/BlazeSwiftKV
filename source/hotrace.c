@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hotrace.h"
+#include "../include/hotrace.h"
 
 static inline size_t	get_bucket_index(uint64_t hash, size_t capacity)
 {
